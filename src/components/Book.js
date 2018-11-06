@@ -1,13 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './App.css'
+import PropTypes from 'prop-types';
+import '../App.css'
 
 class Book extends React.Component {
   render(){
+    var {coverUrl, title, authors} = this.props;
     return(
       <div className="book">
         <div className="book-top">
-          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.coverUrl})` }}></div>
+          <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${coverUrl})` }}></div>
           <div className="book-shelf-changer">
             <select>
               <option value="move" disabled>Move to...</option>
@@ -18,11 +19,17 @@ class Book extends React.Component {
             </select>
           </div>
         </div>
-        <div className="book-title">{this.props.title}</div>
-        <div className="book-authors">{this.props.author}</div>
+        <div className="book-title">{title}</div>
+        <div className="book-authors">{authors.join(", ")}</div>
       </div>
     );
   }
+}
+
+Book.propTypes = {
+  coverUrl: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  authors: PropTypes.array
 }
 
 export default Book;

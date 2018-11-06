@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom';
-import Book from './Book';
+import Book from './components/Book';
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 
@@ -58,7 +58,7 @@ class BooksApp extends React.Component {
                               <Book
                                 coverUrl ={book.imageLinks.thumbnail}
                                 title = {book.title}
-                                author = {book.authors[0]}
+                                authors = {book.authors}
                               />
                             </li>
                           )
@@ -76,7 +76,7 @@ class BooksApp extends React.Component {
                             <Book
                               coverUrl ={book.imageLinks.thumbnail}
                               title = {book.title}
-                              author = {book.authors[0]}
+                              authors = {book.authors}
                             />
                           </li>
                         )
@@ -94,7 +94,7 @@ class BooksApp extends React.Component {
                             <Book
                               coverUrl ={book.imageLinks.thumbnail}
                               title = {book.title}
-                              author = {book.authors[0]}
+                              authors = {book.authors}
                             />
                           </li>
                         )

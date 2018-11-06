@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom';
-import Book from './components/Book';
+import Shelf from './components/Shelf';
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 
@@ -16,6 +16,10 @@ class BooksApp extends React.Component {
   }
 
   render() {
+
+    const shelfTypes = ["Currently Reading", "Want To Read", "Read"];
+    const checkShelf = ["currentlyReading", "wantToRead", "read"];
+
     return (
       <div className="app">
         <Route exact path="/search" render={()=> (
@@ -48,60 +52,14 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Currently Reading</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                        {this.state.books.length > 0 &&
-                          (this.state.books.filter((book) => book.shelf === "currentlyReading").map(book=>
-                            <li key = {book.id}>
-                              <Book
-                                coverUrl ={book.imageLinks.thumbnail}
-                                title = {book.title}
-                                authors = {book.authors}
-                              />
-                            </li>
-                          )
-                        )}
-                    </ol>
-                  </div>
-                </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Want to Read</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      {this.state.books.length > 0 &&
-                        (this.state.books.filter((book) => book.shelf === "wantToRead").map(book=>
-                          <li key = {book.id}>
-                            <Book
-                              coverUrl ={book.imageLinks.thumbnail}
-                              title = {book.title}
-                              authors = {book.authors}
-                            />
-                          </li>
-                        )
-                      )}
-                    </ol>
-                  </div>
-                </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Read</h2>
-                  <div className="bookshelf-books">
-                    <ol className="books-grid">
-                      {this.state.books.length > 0 &&
-                        (this.state.books.filter((book) => book.shelf === "read").map(book=>
-                          <li key = {book.id}>
-                            <Book
-                              coverUrl ={book.imageLinks.thumbnail}
-                              title = {book.title}
-                              authors = {book.authors}
-                            />
-                          </li>
-                        )
-                      )}
-                    </ol>
-                  </div>
-                </div>
+                {shelfTypes.map((shelfType, i) =>
+                  <Shelf
+                    books = {this.state.books.filter((book) => book.shelf === checkShelf[i])}
+                    shelfType = {shelfType}
+                    key = {shelfType}
+                  />
+                )}
+
               </div>
             </div>
             <div className="open-search">

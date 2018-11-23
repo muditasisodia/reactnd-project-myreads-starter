@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Book from './Book';
 import * as BooksAPI from './../BooksAPI';
 import '../App.css'
@@ -30,7 +30,7 @@ class Search extends Component {
   }
 
   render(){
-    var shelfType, coverUrl;
+    var shelfType = "";
     var {shelfBooks} = this.props;
     return(<div className="search-books">
       <div className="search-books-bar">
@@ -57,15 +57,29 @@ class Search extends Component {
         <ol className="books-grid">
           {this.state.books.length>0 && this.state.books!=="" ? (this.state.books.map(book=> {
 
+            /*
             shelfBooks.forEach(shelfBook => {
               if(shelfBook.id === book.id){
                 shelfType = shelfBook.shelf;
+                break;
               }
               else{
                 shelfType = book.shelf;
               }
             }
           );
+          */
+
+            shelfType = book.shelf;
+
+            for(var i = 0; i<shelfBooks.length; i++){
+
+              if(shelfBooks[i].id === book.id){
+                shelfType = shelfBooks[i].shelf;
+                break;
+              }
+            }
+
 
             return (
               <li key = {book.id}>
@@ -75,6 +89,8 @@ class Search extends Component {
                   authors = {book.authors}
                   id = {book.id}
                   shelfType = {shelfType}
+                  book = {book}
+                  handleShelfChange = {this.props.handleShelfChange}
                 />
               </li>);
                 }
@@ -84,6 +100,11 @@ class Search extends Component {
       </div>
     </div>);
   }
+}
+
+Search.propTypes = {
+  shelfBooks: PropTypes.array,
+  handleShelfChange: PropTypes.func
 }
 
 export default Search;

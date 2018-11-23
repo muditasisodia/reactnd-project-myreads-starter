@@ -16,16 +16,24 @@ class BooksApp extends React.Component {
     )
   }
 
-  handleShelfChange = (bookID, newShelf) => {
+  handleShelfChange = (book, newShelf) => {
+
+    var found = false;
 
     var oldBooks = this.state.books;
 
-    var newBooks = oldBooks.map(book => {
-      if(book.id===bookID){
-        book.shelf = newShelf;
+    var newBooks = oldBooks.map(oldBook => {
+      if(oldBook.id===book.id){
+        oldBook.shelf = newShelf;
+        found = true
       }
-      return book;
+      return oldBook;
     });
+
+    if(!found){
+      book.shelf = newShelf;
+      newBooks.push(book);
+    }
 
     this.setState({books: newBooks});
   }
@@ -40,6 +48,7 @@ class BooksApp extends React.Component {
         <Route exact path="/search" render={()=> (
           <Search
             shelfBooks = {this.state.books}
+            handleShelfChange = {this.handleShelfChange}
           />
         )} />
 

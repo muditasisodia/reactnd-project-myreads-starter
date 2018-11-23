@@ -7,7 +7,7 @@ class Book extends React.Component {
 
   constructor(props) {
     super(props);
-    this.state = {value: this.props.shelfType};
+    this.state = {value: "none"};
 
     this.handleChange = this.handleChange.bind(this);
   }
@@ -16,7 +16,7 @@ class Book extends React.Component {
     var  newShelf = event.target.value;
     this.setState({value: newShelf});
     BooksAPI.update({id: this.props.id}, newShelf);
-    this.props.handleShelfChange(this.props.id, newShelf);
+    this.props.handleShelfChange(this.props.book, newShelf);
   }
 
   render(){
@@ -52,7 +52,8 @@ Book.propTypes = {
 Book.defaultProps = {
   coverUrl: '',
   title: '',
-  authors: []
+  authors: [],
+  shelfType: "none"
 };
 
 export default Book;

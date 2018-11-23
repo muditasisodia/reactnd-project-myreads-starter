@@ -18,6 +18,7 @@ class Shelf extends React.Component {
                       title = {book.title}
                       authors = {book.authors}
                       id = {book.id}
+                      book = {book}
                       shelfType = {shelfType}
                       handleShelfChange = {handleShelfChange}
                     />

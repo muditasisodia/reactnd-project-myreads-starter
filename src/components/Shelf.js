@@ -34,7 +34,8 @@ class Shelf extends React.Component {
 Shelf.propTypes = {
   books: PropTypes.array,
   shelfType: PropTypes.string.isRequired,
-  shelfName: PropTypes.string.isRequired
+  shelfName: PropTypes.string.isRequired,
+  handleShelfChange: PropTypes.func.isRequired
 }
 
 export default Shelf;

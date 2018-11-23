@@ -15,7 +15,6 @@ class Book extends React.Component {
   handleChange(event) {
     var  newShelf = event.target.value;
     this.setState({value: newShelf});
-    //this.props.handleShelfChange(this.props., );
     BooksAPI.update({id: this.props.id}, newShelf);
     this.props.handleShelfChange(this.props.id, newShelf);
   }
@@ -46,7 +45,8 @@ class Book extends React.Component {
 Book.propTypes = {
   coverUrl: PropTypes.string,
   title: PropTypes.string.isRequired,
-  authors: PropTypes.array
+  authors: PropTypes.array,
+  handleShelfChange: PropTypes.func.isRequired
 }
 
 export default Book;

@@ -43,10 +43,16 @@ class Book extends React.Component {
 }
 
 Book.propTypes = {
-  coverUrl: PropTypes.string,
+  coverUrl: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   authors: PropTypes.array,
-  handleShelfChange: PropTypes.func.isRequired
+  handleShelfChange: PropTypes.func
 }
+
+Book.defaultProps = {
+  coverUrl: '',
+  title: '',
+  authors: []
+};
 
 export default Book;

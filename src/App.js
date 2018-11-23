@@ -15,6 +15,20 @@ class BooksApp extends React.Component {
     )
   }
 
+  handleShelfChange = (bookID, newShelf) => {
+
+    var oldBooks = this.state.books;
+
+    var newBooks = oldBooks.map(book => {
+      if(book.id===bookID){
+        book.shelf = newShelf;
+      }
+      return book;
+    });
+
+    this.setState({books: newBooks});
+  }
+
   render() {
 
     const shelfTypes = ["Currently Reading", "Want To Read", "Read"];
@@ -52,14 +66,15 @@ class BooksApp extends React.Component {
             </div>
             <div className="list-books-content">
               <div>
-                {shelfTypes.map((shelfType, i) =>
+                {shelfTypes.map((shelfName, i) =>
                   <Shelf
                     books = {this.state.books.filter((book) => book.shelf === checkShelf[i])}
-                    shelfType = {shelfType}
-                    key = {shelfType}
+                    shelfType = {checkShelf[i]}
+                    shelfName = {shelfName}
+                    key = {checkShelf[i]}
+                    handleShelfChange = {this.handleShelfChange}
                   />
                 )}
-
               </div>
             </div>
             <div className="open-search">

@@ -5,10 +5,10 @@ import '../App.css';
 
 class Shelf extends React.Component {
   render(){
-    var {books, shelfType} = this.props;
+    var {books, shelfName, shelfType, handleShelfChange} = this.props;
     return(
       <div className="bookshelf">
-        <h2 className="bookshelf-title">{shelfType}</h2>
+        <h2 className="bookshelf-title">{shelfName}</h2>
         <div className="bookshelf-books">
           <ol className="books-grid">
               {books.length>0 && (books.map(book=>
@@ -17,6 +17,9 @@ class Shelf extends React.Component {
                       coverUrl ={book.imageLinks.thumbnail}
                       title = {book.title}
                       authors = {book.authors}
+                      id = {book.id}
+                      shelfType = {shelfType}
+                      handleShelfChange = {handleShelfChange}
                     />
                   </li>
                 ))
@@ -30,7 +33,8 @@ class Shelf extends React.Component {
 
 Shelf.propTypes = {
   books: PropTypes.array,
-  shelfType: PropTypes.string.isRequired
+  shelfType: PropTypes.string.isRequired,
+  shelfName: PropTypes.string.isRequired
 }
 
 export default Shelf;
